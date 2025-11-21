@@ -44,7 +44,7 @@ public class PrintingConfig<TOwner> : IPrintingConfig
 
     public string PrintToString(TOwner obj)
     {
-        return PrintToString(obj, null, 0, new(new ObjectEqualityComparer()));
+        return PrintToString(obj, null, 0, new(new ObjectReferenceEqualityComparer()));
     }
 
     private string PrintToString(object? obj, MemberInfo? memberInfo, int nestingLevel, Dictionary<object, int> printedObjects)

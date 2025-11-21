@@ -2,7 +2,7 @@
 
 namespace Homework;
 
-public class ObjectEqualityComparer : IEqualityComparer<object>
+public class ObjectReferenceEqualityComparer : IEqualityComparer<object>
 {
     public new bool Equals(object? x, object? y)
     {
