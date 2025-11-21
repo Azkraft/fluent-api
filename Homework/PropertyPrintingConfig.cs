@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Homework;
 
@@ -16,16 +15,6 @@ public class PropertyPrintingConfig<TOwner, TPropType>(PrintingConfig<TOwner> pr
         {
             ((IPrintingConfig)printingConfig).AlternativeTypesSerialization[typeof(TPropType)] = obj => print((TPropType)obj);
         }
-
-        return printingConfig;
-    }
-
-    public PrintingConfig<TOwner> Using(CultureInfo culture)
-    {
-        if (typeof(TPropType).GetMethod("ToString", [typeof(IFormatProvider)]) is null)
-            throw new Exception();
-
-        ((IPrintingConfig)printingConfig).TypesCultureInfo[typeof(TPropType)] = culture;
 
         return printingConfig;
     }

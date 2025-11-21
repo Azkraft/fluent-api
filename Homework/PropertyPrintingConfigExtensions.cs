@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Homework;
 
 public static class PropertyPrintingConfigExtensions
@@ -12,6 +14,17 @@ public static class PropertyPrintingConfigExtensions
         var configIface = (IPropertyPrintingConfig<TOwner, string>)propConfig;
         if (configIface.MemberInfo is not null)
             ((IPrintingConfig)configIface.ParentConfig).StringsTrim[configIface.MemberInfo] = maxLen;
+
+        return configIface.ParentConfig;
+    }
+
+    public static PrintingConfig<TOwner> Using<TOwner, TPropType>(
+        this PropertyPrintingConfig<TOwner, TPropType> propConfig,
+        CultureInfo culture)
+            where TPropType : IFormattable
+    {
+        var configIface = (IPropertyPrintingConfig<TOwner, TPropType>)propConfig;
+        ((IPrintingConfig)configIface.ParentConfig).TypesCultureInfo[typeof(TPropType)] = culture;
 
         return configIface.ParentConfig;
     }
