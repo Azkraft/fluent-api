@@ -1,4 +1,4 @@
-﻿namespace Homework.Tests;
+﻿namespace HomeworkTests;
 
 public class Person
 {

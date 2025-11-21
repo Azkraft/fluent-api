@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
+using Homework;
 using System.Globalization;
 
-namespace Homework.Tests;
+namespace HomeworkTests;
 
 [TestFixture]
 public class ObjectPrinterTests
@@ -19,6 +20,7 @@ public class ObjectPrinterTests
             //3. Для числовых типов указать культуру
             .Printing<double>().Using(CultureInfo.InvariantCulture)
             //4. Настроить сериализацию конкретного свойства
+            .Printing(p => p.Weight).Using(t => $"{t} kg")
             //5. Настроить обрезание строковых свойств (метод должен быть виден только для строковых свойств)
             .Printing(p => p.Name).TrimmedToLength(10)
             //6. Исключить из сериализации конкретного свойства
