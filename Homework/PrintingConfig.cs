@@ -53,21 +53,21 @@ public class PrintingConfig<TOwner> : IPrintingConfig
             return "null" + Environment.NewLine;
 
         var type = obj.GetType();
-        if (printedObjects.TryGetValue(type, out var level))
+        if (printedObjects.TryGetValue(obj, out var level))
             return $"(cycle with object {type.Name} at level {level}){Environment.NewLine}";
 
         if (DoesTypeOverrideToString(type))
             return Serialize(obj, memberInfo) + Environment.NewLine;
 
         if (type.IsClass)
-            printedObjects.Add(type, nestingLevel);
+            printedObjects.Add(obj, nestingLevel);
 
         var result = obj is ICollection collection
             ? PrintCollectionToString(collection, nestingLevel, printedObjects)
             : PrintComplexObjectToString(obj, nestingLevel, printedObjects);
 
         if (type.IsClass)
-            printedObjects.Remove(type);
+            printedObjects.Remove(obj);
 
         return result;
     }
